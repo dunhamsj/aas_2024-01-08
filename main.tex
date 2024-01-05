@@ -40,7 +40,7 @@
     Eirik Endeve (ORNL/UTK), %
     Kelly Holley--Bockelmann (Vanderbilt/Fisk), %
     Anthony Mezzacappa (UTK), \\
-    William Gabella (Vanderbilt), \\
+    William Gabella (Vanderbilt), %
     Sait Umar (Vanderbilt)
   \end{center}
 
@@ -85,43 +85,217 @@
     \ul{h}igh-\ul{or}der
     \ul{n}eutrino-r\ul{ad}iation hydr\ul{o}dynamics\\[1em]
 
-    \begin{columns}[c]
-
-      \column{0.5\textwidth}
-
-        \begin{itemize}
-          \item
-            DG
-          \item
-            SSPRK/IMEX
-          \item
-            GR (xCFC)
-          \item
-            Hydro\footnote{\citet{ebd2019,dem2020,pbe2021}}
-            (Valencia)
-          \item
-            Neutrino transport\footnote{\citet{lec2021}} (M1)
-          \item
-            Interfaces to tabulated EoS/Opacities
-            (weaklib: \url{https://github.com/starkiller-astro/weaklib})
-        \end{itemize}
-
-      \column{0.5\textwidth}
-
-        \begin{itemize}
-          \item
-            Fluid self-gravity via \poseidon:
-            \url{https://github.com/jrober50/Poseidon}
-          \item
-            GPUs via OpenACC or OpenMP pragmas
-          \item
-            MPI parallelism and AMR via \amrex:
-            \url{https://github.com/AMReX-Codes/amrex}
-        \end{itemize}
-
-    \end{columns}
-
   \end{center}
+
+  \begin{columns}[c]
+
+    \column{0.5\textwidth}
+
+      \begin{itemize}
+        \item
+          DG
+        \item
+          SSPRK/IMEX
+        \item
+          GR (xCFC)
+        \item
+          Hydro\footnote{\citet{ebd2019,dem2020,pbe2021}}
+          (Valencia)
+        \item
+          Neutrino transport\footnote{\citet{lec2021}} (M1)
+        \item
+          Interfaces to tabulated EoS/Opacities
+          (weaklib: \url{https://github.com/starkiller-astro/weaklib})
+      \end{itemize}
+
+    \column{0.5\textwidth}
+
+      \vspace{-6em}
+      \begin{itemize}
+        \item
+          Fluid self-gravity via \poseidon:
+          \url{https://github.com/jrober50/Poseidon}
+        \item
+          GPUs via OpenACC or OpenMP pragmas
+        \item
+          MPI parallelism and AMR via \amrex:
+          \url{https://github.com/AMReX-Codes/amrex}
+      \end{itemize}
+
+  \end{columns}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Discontinuous Galerkin (DG) Method}
+
+  \Fontvi
+
+  \begin{equation*}
+    u\left(x\right)=1+0.1\,\sin\left(2\pi x\right)
+  \end{equation*}
+
+  \begin{figure}[htb!]
+    \centering
+    \includegraphics[width=0.7\textwidth]{fig.sine.png}
+  \end{figure}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Discontinuous Galerkin (DG) Method}
+
+  \Fontvi
+
+  \begin{equation*}
+    u_{h}\left(x,t\right)
+    :=\sum\limits_{i=1}^{N}
+      u_{i}\left(t\right)\,\ell_{i}\left(x\right)
+  \end{equation*}
+
+  \begin{figure}[htb!]
+    \centering
+    \includegraphics[width=0.7\textwidth]{fig.DG_1D.png}
+  \end{figure}
+
+\end{frame}
+
+\begin{frame}
+
+  \begin{figure}[htb!]
+    \centering
+    \includegraphics[width=0.8\textwidth]{fig.ConvergenceRates.png}
+  \end{figure}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Standing Accretion Shock Instability}
+
+  Used \thornado{} to investigate the role of GR on the SASI%
+  \footnote{\citet{dem2020,dem2023}}
+
+  \begin{columns}[c]
+
+    \column{.6\textwidth}
+
+      \begin{figure}[htb!]
+        \centering
+        \includegraphics[width=0.9\textwidth]{fig.sasi.png}
+      \end{figure}
+
+    \column{.4\textwidth}
+
+      \begin{figure}[htb!]
+        \centering
+        \includegraphics[width=0.9\textwidth]{fig.sasi_GRvNR.pdf}
+      \end{figure}
+
+  \end{columns}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Mesh Refinement}
+
+  \begin{figure}[htb!]
+    \centering
+    \includegraphics[width=0.7\textwidth]{fig.MeshRefinement_2D.png}
+  \end{figure}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Kelvin--Helmholtz Instability}
+
+  \begin{center}
+    {\includegraphics[width=0.6\textwidth]{fig.KHI.pdf}}
+  \end{center}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Adiabatic Collapse (AMR, Collapse Phase)}
+
+  \begin{figure}[htb!]
+    \centering
+    \includegraphics[width=0.8\textwidth]{fig.collapse.png}
+  \end{figure}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Adiabatic Collapse (AMR, Post-Bounce Phase)}
+
+  \begin{figure}[htb!]
+    \centering
+    \includegraphics[width=0.8\textwidth]{fig.postBounce.png}
+  \end{figure}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Bibliography}
+
+  \Fontvi
+  \bibliography{bibfile.bib}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Summary}
+
+  \begin{tabular}{cl}
+    \begin{tabular}{l}
+      \parbox{0.7\linewidth}%
+      {Can run pure hydro problems in GR with AMR}
+    \end{tabular}
+    \begin{tabular}{c}
+      \includegraphics[width=0.15\textwidth]{fig.KHI.pdf}
+    \end{tabular}
+  \end{tabular}
+
+  \begin{tabular}{cl}
+    \begin{tabular}{c}
+      \includegraphics[width=0.2\textwidth]{fig.Collapse.png}
+    \end{tabular}
+    \begin{tabular}{l}
+      \parbox{0.7\linewidth}%
+      {Can run hydro+self-gravity problems in GR with AMR}
+    \end{tabular}
+  \end{tabular}
+
+  \begin{tabular}{cl}
+    \begin{tabular}{l}
+      \parbox{0.7\linewidth}%
+      {Working on coupling GR transport to existing hydro+gravity modules}
+    \end{tabular}
+    \begin{tabular}{c}
+      \includegraphics[width=0.2\textwidth]{fig.PostBounce.png}
+    \end{tabular}
+  \end{tabular}
+
+\end{frame}
+
+\appendix
+
+\begin{frame}
+\frametitle{Slope Limiter}
+
+  \Fontvi
+  \begin{equation*}
+  u_{h}\left(x,t\right)
+  =\sum\limits_{n=1}^{N}
+  C_{n}\left(t\right)\,P_{n}\left(x\right)\implies
+  \tilde{u}_{h}\left(x,t\right)
+  =C_{1}\left(t\right)\,P_{1}\left(x\right)
+  +\tilde{C}_{2}\left(t\right)\,P_{2}\left(x\right)
+  \end{equation*}
+
+  \begin{figure}[htb!]
+    \centering
+    \includegraphics[width=0.6\textwidth]{fig.MinMod.jpeg}
+  \end{figure}
 
 \end{frame}
 
@@ -187,151 +361,6 @@
       \end{equation*}
 
   \end{columns}
-
-\end{frame}
-
-\begin{frame}
-\frametitle{Discontinuous Galerkin (DG)}
-
-  \Fontvi
-
-  \begin{equation*}
-    u_{h}\left(x,t\right)
-    :=\sum\limits_{i=1}^{N}
-      u_{i}\left(t\right)\,\ell_{i}\left(x\right)
-  \end{equation*}
-
-  \begin{figure}[htb!]
-    \centering
-    \includegraphics[width=0.7\textwidth]{fig.DG_1D.png}
-  \end{figure}
-
-\end{frame}
-
-\begin{frame}
-
-  \begin{figure}[htb!]
-    \centering
-    \includegraphics[width=0.8\textwidth]{fig.ConvergenceRates.png}
-  \end{figure}
-
-\end{frame}
-
-\begin{frame}
-
-  \Fontvi
-  \begin{equation*}
-  u_{h}\left(x,t\right)
-  =\sum\limits_{n=1}^{N}
-  C_{n}\left(t\right)\,P_{n}\left(x\right)\implies
-  \tilde{u}_{h}\left(x,t\right)
-  =C_{1}\left(t\right)\,P_{1}\left(x\right)
-  +\tilde{C}_{2}\left(t\right)\,P_{2}\left(x\right)
-  \end{equation*}
-
-  \begin{figure}[htb!]
-    \centering
-    \includegraphics[width=0.6\textwidth]{fig.MinMod.jpeg}
-  \end{figure}
-
-\end{frame}
-
-\begin{frame}
-\frametitle{Standing Accretion Shock Instability}
-
-  Used \thornado{} to investigate the role of GR on the SASI%
-  \footnote{\citet{dem2020,dem2023}}
-
-  \begin{columns}[c]
-
-    \column{.6\textwidth}
-
-      \begin{figure}[htb!]
-        \centering
-        \includegraphics[width=0.9\textwidth]{fig.sasi.png}
-      \end{figure}
-
-    \column{.4\textwidth}
-
-      \begin{figure}[htb!]
-        \centering
-        \includegraphics[width=0.9\textwidth]{fig.sasi_GRvNR.pdf}
-      \end{figure}
-
-  \end{columns}
-
-\end{frame}
-
-\begin{frame}
-\frametitle{Kelvin--Helmholtz Instability}
-
-  \begin{center}
-    {\includegraphics[width=0.6\textwidth]{fig.KHI.pdf}}
-  \end{center}
-
-\end{frame}
-
-\begin{frame}
-\frametitle{Adiabatic Collapse (AMR, Collapse Phase)}
-
-  \begin{figure}[htb!]
-    \centering
-    \includegraphics[width=0.8\textwidth]{fig.collapse.png}
-  \end{figure}
-
-\end{frame}
-
-\begin{frame}
-\frametitle{Adiabatic Collapse (AMR, Post-Bounce Phase)}
-
-  \begin{figure}[htb!]
-    \centering
-    \includegraphics[width=0.8\textwidth]{fig.postBounce.png}
-  \end{figure}
-
-\end{frame}
-
-\begin{frame}
-\frametitle{Bibliography}
-
-  \Fontvi
-  \bibliography{bibfile.bib}
-
-\end{frame}
-
-\begin{frame}
-\frametitle{Summary}
-
-  \begin{tabular}{cl}
-    \begin{tabular}{l}
-      \parbox{0.7\linewidth}%
-      {Can run pure hydro problems in GR with AMR}
-    \end{tabular}
-    \begin{tabular}{c}
-      \includegraphics[width=0.15\textwidth]{fig.KHI.pdf}
-    \end{tabular}
-  \end{tabular}
-
-  \begin{tabular}{cl}
-    \begin{tabular}{c}
-      \includegraphics[width=0.2\textwidth]{fig.Collapse.png}
-    \end{tabular}
-    \begin{tabular}{l}
-      \parbox{0.7\linewidth}%
-      {Doing GR, adiabatic collapse simulations with mesh refinement}
-    \end{tabular}
-  \end{tabular}
-
-  \begin{tabular}{cl}
-    \begin{tabular}{l}
-      \parbox{0.7\linewidth}%
-      {Working on coupling GR transport to existing hydro+gravity modules}
-    \end{tabular}
-    \begin{tabular}{c}
-      \includegraphics[width=0.2\textwidth]{fig.PostBounce.png}
-    \end{tabular}
-  \end{tabular}
-
 
 \end{frame}
 

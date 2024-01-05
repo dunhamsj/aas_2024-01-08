@@ -10,6 +10,12 @@ from gaussxw import gaussxw
 NN = 10
 
 x = np.linspace( -0.5, +0.5, 100 )
+xL = 0.7
+xH = 0.9
+xC = 0.5 * ( xL + xH )
+dX = xH - xL
+
+x = np.linspace( xL, xH, 100 )
 
 def Lagrange( x, xq, i ):
 
@@ -34,14 +40,19 @@ def rhoh( x, rho_q, xq ):
     return rho
 
 def rhoExact( x ):
-    return 1.0 + x + x**2 + x**3 + x**4 + x**5
+    return 1.0 + 0.1 * np.sin( 2.0 * np.pi * x )
+    #return 1.0 + x + x**2 + x**3 + x**4 + x**5
 
 def CreateElement():
 
     fig, ax = plt.subplots( 1, 1 )
 
-    xticks = [ -0.5, -0.25, 0.0, +0.25, +0.5 ]
-    ax.set_xticks( xticks )
+    ax.set_xticks( [ xL, xC, xH ], \
+                   [ r'$x_{\mathrm{L}}$', \
+                     r'$x_{\mathrm{C}}$', \
+                     r'$x_{\mathrm{H}}$' ] )
+    ax.axvline( xL )
+    ax.axvline( xH )
 
     return fig, ax
 
@@ -66,6 +77,8 @@ def AddQuadraturePoints( ax, N, c ):
 
     xq, wq = gaussxw( N )
 
+    xq = xC + dX * xq
+
     ms = 5
     if N == 1: ms = 10
     rhoE = rhoExact( x )
@@ -79,8 +92,8 @@ def AddFacePoints( ax ):
 
     rhoE = rhoExact( x )
     a = 0.5 * ( rhoE.min() + rhoE.max() )
-    ax.plot( -0.5, a, 'ks', mfc = 'None' )
-    ax.plot( +0.5, a, 'ks', mfc = 'None' )
+    ax.plot( xL, a, 'ks', mfc = 'None' )
+    ax.plot( xH, a, 'ks', mfc = 'None' )
 
 def PlotExact( fig, ax ):
 
@@ -101,6 +114,9 @@ def PlotDensity( N, fig, ax, vmin, vmax, c ):
 
     xqN, wqN = gaussxw( N  )
     xq , wq  = gaussxw( NN )
+
+    xqN = xC + dX * xqN
+    xq  = xC + dX * xq
 
     intU = np.empty( N, np.float64 )
 
@@ -141,7 +157,7 @@ if __name__ == '__main__':
     PlotDensity( N, fig, ax, vmin, vmax, c )
 #    AddQuadraturePoints( ax, N, c )
 
-    ax.legend()
+    ax.legend( loc = 'upper center' )
 
     #plt.show()
 

@@ -11,3 +11,4 @@ main.snm
 main.synctex.gz
 main.toc
 *.fls
+__pycache__

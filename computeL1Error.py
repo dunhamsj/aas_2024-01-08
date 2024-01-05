@@ -119,12 +119,15 @@ ax.legend()
 
 ax.set_title( 'Convergence Rates for\nSine Wave Advection (1D)' )
 
-ax.grid()
+ax.grid( which = 'both' )
+ax.xaxis.set_ticks_position( "both" )
+ax.yaxis.set_ticks_position( "both" )
 
 ax.set_xlabel( r'$\mathrm{nDOF}:=N\times\mathrm{nElements}$' )
 
-yLabel = r'$\int_{\mathcal{D}}\left|u_{\mathrm{final}}-u_{\mathrm{initial}}\right|dx$' \
-           + r'$/\int\left|u_{\mathrm{final}}\right|dx$'
+yLabel \
+  = r'$\int_{\mathcal{D}}\left|u_{\mathrm{final}}-u_{\mathrm{initial}}\right|$' \
+      + r'$/\int_{\mathcal{D}}\left|u_{\mathrm{final}}\right|$'
 ax.set_ylabel( yLabel )
 
 #plt.show()
