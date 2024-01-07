@@ -10,8 +10,8 @@ from gaussxw import gaussxw
 NN = 10
 
 x = np.linspace( -0.5, +0.5, 100 )
-xL = 0.7
-xH = 0.9
+xL = 0.6
+xH = 0.8
 xC = 0.5 * ( xL + xH )
 dX = xH - xL
 
@@ -143,12 +143,12 @@ if __name__ == '__main__':
     #AddFacePoints( ax )
 
     N = 1
-    c = 'm'
+    c = 'r'
     PlotDensity( N, fig, ax, vmin, vmax, c )
 #    AddQuadraturePoints( ax, N, c )
 
     N = 2
-    c = 'r'
+    c = 'm'
     PlotDensity( N, fig, ax, vmin, vmax, c )
 #    AddQuadraturePoints( ax, N, c )
 

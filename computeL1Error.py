@@ -100,7 +100,7 @@ for i in range( len( nN ) ):
 
 fig, ax = plt.subplots( 1, 1 )
 
-c = [ 'b', 'r' ]
+c = [ 'm', 'b' ]
 
 for i in range( len( nN ) ):
 
