@@ -131,7 +131,7 @@ def PlotDensity( N, fig, ax, vmin, vmax, c ):
     for i in range( rho.shape[0] ):
         rho[i] = rhoh( x[i], rho_q, xqN )
 
-    ax.plot( x, rho, c + '--', label = r'$N={:d}$'.format( N ) )
+    ax.plot( x, rho, c + '--', label = r'$k={:d}$'.format( N-1 ) )
     ax.plot( xqN, rho_q, c + 'x' )
 
     return

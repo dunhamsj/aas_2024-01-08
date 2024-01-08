@@ -113,7 +113,7 @@ for i in range( len( nN ) ):
     ax.loglog( x, y1, c[i] + '.' )
     #ax.loglog( x, y2, c[i] + 'x', label = r'$L_{2}$' )
     ax.loglog( x, y1[0] * 10**( - N * np.log10( x / x[0] ) ), c[i] + '-', \
-                label = r'$N={:d}$'.format( N ) )
+                label = r'$k={:d}$'.format( N-1 ) )
 
 ax.legend()
 
